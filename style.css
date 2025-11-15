@@ -20,57 +20,62 @@ button {
 }
 
 h1 {
-    font-size: 70px;
+    font-size: 90px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 80px;
     text-align: center;
 }
 
 p {
-    font-size: 24px;
+    font-size: 30px;
     margin-top: -20px;
     margin-bottom: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .container::before {
     content: '';
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background-image: repeating-radial-gradient(
-        circle,
-        rgb(99, 98, 98) 0px,
-        rgb(99, 98, 98) 4px,    
-        transparent 4px,
-        transparent 50px 
-    );
-    background-size: 50px 50px;    
-    animation: moveDots 5s linear infinite;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        repeating-linear-gradient(to right, rgb(99, 98, 98) 0px, rgb(99, 98, 98) 1px, transparent 1px, transparent 50px),
+        repeating-linear-gradient(to bottom, rgb(99, 98, 98) 0px, rgb(99, 98, 98) 1px, transparent 1px, transparent 50px);
+    background-size: 50px 50px;
+    animation: moveGrid 10s linear infinite;
     opacity: 0.3;
     pointer-events: none;
     z-index: -1;
 }
 
-@keyframes moveDots {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
+@keyframes moveGrid {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 50px 50px, 50px 50px; }
 }
 
 
-.emotions {
+
+.next {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    gap: 25px;
+    flex-direction: column;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     padding: 50px 0;
     flex-wrap: wrap;
-    background-color: #ff0000;
+    background-color: #ffffff;
 }
 
 
-.emotions button {
+.next button {
     padding: 16px 32px;
     border-radius: 8px;
     border: 1px solid rgba(0,0,0,0.08);
@@ -83,70 +88,8 @@ p {
     font-weight: 600;
 }
 
-.emotions button:focus{
+.next button:focus{
     outline: 3px solid rgba(99, 102, 241, 0.15);
-}
-
-#angry {
-    background-color: #ff4444;
-    color: white;
-}
-
-#angry:hover {
-    animation: popShake 0.45s ease-in-out infinite;
-    background-color: #ff0000;
-    will-change: transform;
-    transform-origin: center;
-}
-
-#depressed{
-    background-color: white;
-    z-index:10;
-}
-
-#depressed:hover {
-    animation: popShake 0.45s ease-in-out infinite;
-    background-color: #64b9de;
-    color: white;
-    will-change: transform;
-    transform-origin: center;
-}
-
-#happy {
-    background-color: #FFD700;
-    color: black;
-}
-
-#stressed {
-    background-color: #FF6B6B;
-    color: white;
-}
-
-#stressed:hover {
-    animation: popShake 0.45s ease-in-out infinite;
-    background-color: #FF4444;
-    will-change: transform;
-    transform-origin: center;
-}
-
-#hungry {
-    background-color: #FF8C00;
-    color: white;
-}
-
-#hungry:hover {
-    animation: popShake 0.45s ease-in-out infinite;
-    background-color: #FF6347;
-    will-change: transform;
-    transform-origin: center;
-}
-
-#happy:hover {
-    /* pop out with scale and shake */
-    animation: popShake 0.45s ease-in-out infinite;
-    background-color: #FFA500;
-    will-change: transform;
-    transform-origin: center;
 }
 .emoji-container{
     position:fixed;
@@ -196,3 +139,42 @@ p {
   .container::before { animation: none; }
   .angry:hover { animation: none; }
 }
+
+
+@font-face {
+    font-family: face;
+    src: url("");
+}
+
+/* Utility to hide elements until needed */
+.hidden { display: none !important; }
+
+/* Recommendation box styling */
+.recommendation {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: rgba(99, 102, 241, 0.06);
+    border-radius: 8px;
+    border: 1px solid rgba(99,102,241,0.12);
+    max-width: 560px;
+    font-size: 16px;
+}
+
+.emotions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.emotions button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.emotions button:focus { outline: 3px solid rgba(99, 102, 241, 0.12); }

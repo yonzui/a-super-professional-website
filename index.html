@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A super professional website</title>
+    <title>Vibely</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- <link href= link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
 
 
-        <h1>Overreact</h1>
-        <p>Tell us how you feel. We'll panic for you.</p>
+        <h1>Vibely</h1>
+        <p><strong>Tired of listening to the same 4 songs?</strong>
+        We got you.
+        Scroll, click, and instantly find new artists, new vibes, and new favorites, all in one place.</p>
 
     </div>
 
-    <div class="emotions">
-        <h1>How are you feeling???</h1>
-        <hr>
-        <button id="depressed" type="button" data-emoji="🤤">Depressed</button>
-        <div class="emoji-container"></div>
-
-        <button id="stressed" type="button" data-emoji="🥺">Stressed</button>
-        <button id="hungry" type="button" data-emoji="😖">Hungry</button>
-        <button id="happy" type="button" data-emoji="🤬">Happy</button>
-        <button id="angry" type="button" data-emoji="🥳">Angry</button>
+    <div class="next">
+        <h2>Unlock New Sounds</h2>
+        <button id="recommendBtn" type="button">Get Recommendation</button>
+        <div id="recommendation" class="recommendation hidden" aria-live="polite"></div>
+            <div class="emotions hidden" aria-hidden="true">
+                <button data-emoji="😰" class="emotion-btn">Stressed</button>
+                <button data-emoji="😔" class="emotion-btn">Depressed</button>
+                <button data-emoji="😡" class="emotion-btn">Angry</button>
+                <button data-emoji="😄" class="emotion-btn">Happy</button>
+                <button data-emoji="🍔" class="emotion-btn">Hungry</button>
+            </div>
+            <div class="emoji-container"></div>
     
     </div>
 

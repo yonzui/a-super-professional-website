@@ -9,10 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
           createEmojiEcho(btn, emoji);
       });
 
-      btn.addEventListener('click', () => {
-          alert('You feel: ' + btn.innerText);
-      });
-
       btn.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
@@ -45,5 +41,32 @@ document.addEventListener('DOMContentLoaded', () => {
       emojiContainer.appendChild(emoji);
 
       emoji.addEventListener('animationend', () => emoji.remove());
+  }
+
+  // Recommendation button logic: show a random recommendation and reveal emotions
+  const recommendBtn = document.getElementById('recommendBtn');
+  const recommendationDiv = document.getElementById('recommendation');
+  const emotionsDiv = document.querySelector('.emotions');
+
+  const recommendations = [
+      { title: 'Men I Trust — Show Me How', desc: 'Dreamy indie-electronic track with warm vocals.' },
+      { title: 'Khruangbin — Time (You and I)', desc: 'Groovy instrumental with psychedelic vibes.' },
+      { title: 'Faye Webster — Kingston', desc: 'Mellow alt-pop with soulful storytelling.' },
+      { title: 'Tame Impala — The Less I Know The Better', desc: 'Psychedelic pop with an infectious bassline.' },
+      { title: 'Arlo Parks — Euphoric Recall', desc: 'Intimate lyricism and soft R&B production.' }
+  ];
+
+  if (recommendBtn && recommendationDiv) {
+      recommendBtn.addEventListener('click', () => {
+          const rec = recommendations[Math.floor(Math.random() * recommendations.length)];
+          recommendationDiv.innerHTML = `<strong>${rec.title}</strong><p>${rec.desc}</p>`;
+          recommendationDiv.classList.remove('hidden');
+          if (emotionsDiv) {
+              emotionsDiv.classList.remove('hidden');
+              emotionsDiv.setAttribute('aria-hidden', 'false');
+          }
+          recommendBtn.setAttribute('aria-expanded', 'true');
+          recommendationDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
   }
 });
