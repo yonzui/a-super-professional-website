@@ -1,0 +1,198 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;    
+}
+
+button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 10px;
+    position: relative;
+}
+
+h1 {
+    font-size: 70px;
+    text-align: center;
+}
+
+p {
+    font-size: 24px;
+    margin-top: -20px;
+    margin-bottom: 40px;
+}
+
+.container::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: repeating-radial-gradient(
+        circle,
+        rgb(99, 98, 98) 0px,
+        rgb(99, 98, 98) 4px,    
+        transparent 4px,
+        transparent 50px 
+    );
+    background-size: 50px 50px;    
+    animation: moveDots 5s linear infinite;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes moveDots {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+
+.emotions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    flex-wrap: wrap;
+    background-color: #ff0000;
+}
+
+
+.emotions button {
+    padding: 16px 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+    background: #fff;
+    text-align: center;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.emotions button:focus{
+    outline: 3px solid rgba(99, 102, 241, 0.15);
+}
+
+#angry {
+    background-color: #ff4444;
+    color: white;
+}
+
+#angry:hover {
+    animation: popShake 0.45s ease-in-out infinite;
+    background-color: #ff0000;
+    will-change: transform;
+    transform-origin: center;
+}
+
+#depressed{
+    background-color: white;
+    z-index:10;
+}
+
+#depressed:hover {
+    animation: popShake 0.45s ease-in-out infinite;
+    background-color: #64b9de;
+    color: white;
+    will-change: transform;
+    transform-origin: center;
+}
+
+#happy {
+    background-color: #FFD700;
+    color: black;
+}
+
+#stressed {
+    background-color: #FF6B6B;
+    color: white;
+}
+
+#stressed:hover {
+    animation: popShake 0.45s ease-in-out infinite;
+    background-color: #FF4444;
+    will-change: transform;
+    transform-origin: center;
+}
+
+#hungry {
+    background-color: #FF8C00;
+    color: white;
+}
+
+#hungry:hover {
+    animation: popShake 0.45s ease-in-out infinite;
+    background-color: #FF6347;
+    will-change: transform;
+    transform-origin: center;
+}
+
+#happy:hover {
+    /* pop out with scale and shake */
+    animation: popShake 0.45s ease-in-out infinite;
+    background-color: #FFA500;
+    will-change: transform;
+    transform-origin: center;
+}
+.emoji-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    pointer-events:none;
+    z-index:5;
+}
+
+.emoji {
+    position: absolute;
+    font-size: 3rem;
+    pointer-events: none; /* Emojis should not block clicks */
+    animation: echo-fade-out 2s forwards;
+}
+
+@keyframes echo-fade-out {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.5); /* Use CSS variables for random movement */
+    }
+}
+
+@keyframes popShake {
+    0% { transform: translateX(0) scale(1); }
+    25% { transform: translateX(-8px) scale(1.15); }
+    50% { transform: translateX(8px) scale(1.15); }
+    75% { transform: translateX(-8px) scale(1.15); }
+    100% { transform: translateX(0) scale(1); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container::before { animation: none; }
+  .angry:hover { animation: none; }
+}
