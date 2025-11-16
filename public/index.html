@@ -5,22 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vibely</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <link href= link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="keys">
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </div>
+    </div>
+
     <div class="background"></div>
     <div class="container">
         <h1>Vibely</h1>
         <p><strong>Tired of listening to the same 4 songs?</strong>
         We got you.
         Scroll, click, and instantly find new artists, new vibes, and new favorites, all in one place.</p>
+        <h3>↓ Scroll ↓</h3>
 
     </div>
 
     <div class="next">
         <h2>Unlock New Sounds</h2>
-        <button id="recommendBtn" type="button">Get Recommendation</button>
+        <button id="recommendBtn" type="button">The Vibes</button>
         <div id="recommendation" class="recommendation hidden" aria-live="polite"></div>
             <div class="emotions hidden" aria-hidden="true">
                 <button data-emoji="😰" class="emotion-btn">Stressed</button>
@@ -31,12 +38,12 @@
             </div>
             <div class="emoji-container"></div>
 
-        <button onclick="playSong()">Play Song</button>
-        <h2>AI Music Reccomendation </h2>
+        <h3>↓ Find and Play a Song! ↓</h3>
+        <h2>AI Music Recommendation </h2>
 
         <div id="chat"></div>
 
-        <input id="input" placeholder="What's your vibe?..." style="width:80%">
+        <input id="input" placeholder="How are you feeling?.." style="width:80%">
         <button onclick="sendMessage()">Send</button>
 
     </div>

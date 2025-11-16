@@ -5,9 +5,15 @@
     --x4: 30%; --y4: 70%;
 }
 
+:root {
+    --nx1: 20%; --ny1: 30%;
+    --nx2: 70%; --ny2: 25%;
+    --nx3: 50%; --ny3: 75%;
+    --nx4: 30%; --ny4: 70%;
+}
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Elms Sans', sans-serif;
     background-color: white;  
     margin: 0;
     font-family: sans-serif;
@@ -15,9 +21,33 @@ body {
 }
 
 button {
-    background-color: white;
     color: black;
     cursor: pointer;
+    background: linear-gradient(
+        90deg,
+        #fcdff1,
+        #e1ebff,
+        #e3fbee,
+        #fff0e4,
+        #fde4f4
+    );
+
+    background-size: 300%;
+    animation: gradientMove 4s linear infinite;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Gradient animation */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 .container {
@@ -39,6 +69,26 @@ h2 {
     font-size: 80px;
     text-align: center;
 }
+
+h3 {
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* how high it floats */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 
 p {
     font-size: 30px;
@@ -82,9 +132,34 @@ p {
     justify-content: center;
     padding: 50px 0;
     flex-wrap: wrap;
-    background-color: #ffffff;
+    position: relative;
+
+    background: rgba(173, 216, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+
 }
 
+.next::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at var(--nx1) var(--ny1), rgba(255,110,199,0.35), transparent 60%),
+        radial-gradient(circle at var(--nx2) var(--ny2), rgba(110,158,255,0.35), transparent 60%),
+        radial-gradient(circle at var(--nx3) var(--ny3), rgba(138,255,193,0.35), transparent 60%),
+        radial-gradient(circle at var(--nx4) var(--ny4), rgba(255,174,110,0.35), transparent 60%);
+    filter: blur(70px);
+    pointer-events: none;
+}
+
+
+@keyframes moveRight {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 0; }
+}
 
 .next button {
     padding: 16px 32px;
@@ -92,12 +167,18 @@ p {
     border: 1px solid rgba(0,0,0,0.08);
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
-    background: #fff;
     text-align: center;
-    background-color: white;
+    background: rgba(173, 216, 255, 0.15);
     font-size: 16px;
     font-weight: 600;
 }
+
+.next button:hover,
+.emotions button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+}
+
 
 .next button:focus{
     outline: 3px solid rgba(99, 102, 241, 0.15);
@@ -151,12 +232,6 @@ p {
   .angry:hover { animation: none; }
 }
 
-
-@font-face {
-    font-family: face;
-    src: url("");
-}
-
 /* Utility to hide elements until needed */
 .hidden { display: none !important; }
 
@@ -183,7 +258,7 @@ p {
     padding: 10px 14px;
     border-radius: 8px;
     border: 1px solid rgba(0,0,0,0.08);
-    background: #fff;
+    background: rgba(173, 216, 255, 0.15);
     cursor: pointer;
     font-weight: 600;
 }
@@ -197,19 +272,38 @@ p {
     filter: blur(100px);
     
     background:
-        /*radial-gradient(circle at 20% 30%, #ff6ec7 0%, transparent 60%),
-        radial-gradient(circle at 80% 20%, #6e9eff 0%, transparent 60%),
-        radial-gradient(circle at 50% 80%, #8affc1 0%, transparent 60%),
-        radial-gradient(circle at 30% 70%, #ffae6e 0%, transparent 60%);*/
         radial-gradient(circle at var(--x1) var(--y1), #ff6ec7 0%, transparent 60%),
         radial-gradient(circle at var(--x2) var(--y2), #6e9eff 0%, transparent 60%),
         radial-gradient(circle at var(--x3) var(--y3), #8affc1 0%, transparent 60%),
         radial-gradient(circle at var(--x4) var(--y4), #ffae6e 0%, transparent 60%);
     filter: blur(100px);
-    animation: floatBlobs 15s infinite alternate ease-in-out;
+   /* animation: floatBlobs 15s infinite alternate ease-in-out;*/
 }
 
 
 audio {
     display: none;
+} 
+
+.keys {
+    display: none;
+}
+
+#input {
+  width: 80%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.8); /* semi-transparent */
+  backdrop-filter: blur(10px); /* glass effect */
+  outline: none; /* remove default outline */
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+#input:focus {
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.5); /* glow on focus */
+  transform: scale(1.02); /* slight zoom when typing */
 }

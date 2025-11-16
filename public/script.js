@@ -7,28 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const emotionRecommendations = {
         stressed: [
-            { title: 'Lo-fi Chill Mix', desc: 'Calming lo-fi beats to help you breathe and focus.' },
-            { title: 'Instrumental Calm — Rainy Study', desc: 'Gentle piano and ambient textures.' }
+            { title: 'Chill Mix', desc: 'Calming, chill songs to help you focus, and relax.' },
         ],
         depressed: [
-            { title: 'Ambient Comfort', desc: 'Soft soundscapes and gentle vocals to soothe.' },
-            { title: 'Warm Folk', desc: 'Acoustic tracks with intimate storytelling.' }
+            { title: 'Sad Mix', desc: 'Soft songs to match your mood.' },
         ],
         angry: [
-            { title: 'High-Energy Rock', desc: 'Aggressive guitars and cathartic drums.' },
-            { title: 'Electronic Bass Drop', desc: 'Hard-hitting beats to vent along to.' }
+            { title: 'High-Energy Mix', desc: 'Guitars and high-energy beats to get you hype.' },
         ],
         happy: [
-            { title: 'Feel-Good Pop', desc: 'Upbeat tracks that put you in a good mood.' },
-            { title: 'Sunshine Indie', desc: 'Bright melodies and jangly guitars.' }
+            { title: 'Energetic Mix', desc: 'Upbeat songs to start your day with.' },
         ],
         hungry: [
-            { title: 'Café Jazz', desc: 'Smooth background jazz — great for cooking.' },
-            { title: 'Latin Grooves', desc: 'Rhythmic tunes that pair well with food prep.' }
+            { title: 'Café Mix', desc: 'Smooth, slow songs to vibe to.' },
         ]
     };
 
-    const genericRecs = [ { title: 'Discover Weekly', desc: 'A mix of fresh picks curated for you.' } ];
 
 const blobs = ['--x1','--y1','--x2','--y2','--x3','--y3','--x4','--y4'];
 const blobTargets = { '--x1':20, '--y1':30, '--x2':70, '--y2':25, '--x3':50, '--y3':75, '--x4':30, '--y4':70 };
@@ -79,19 +73,17 @@ function updateBlob(variable, target) {
       // Show a recommendation only when an emotion button is clicked
       btn.addEventListener('click', () => {
           const emotionKey = btn.innerText.trim().toLowerCase();
-          const recs = emotionRecommendations[emotionKey] || genericRecs;
+          const recs = emotionRecommendations[emotionKey];
           const rec = recs[Math.floor(Math.random() * recs.length)];
           if (recommendationDiv) {
               recommendationDiv.innerHTML =
-              
-              `<strong>${rec.title}</strong><p>${rec.desc}</p>
-              ${rec.song}`;
+              `<strong">${rec.title}</strong><p>${rec.desc}</p>`;
 
-              
+          
               recommendationDiv.classList.remove('hidden');
               recommendationDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
-      });
+  });
 
       btn.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -150,62 +142,53 @@ function playSong() {
 
 
 
-// AI Song
-
 const songs = [
-  {
-    title: "Cece's Interlude - Drake",
-    tags: "chill sad emotional soft piano slow indie",
-    url: "songs/cece.mp3"
-  },
-  {
-    title: "Guess - Charli XCX & Billie Eilish",
-    tags: "energetic fun high energy club bass boost",
-    url: "songs/romeo.mp3"
-  },
-  {
-    title: "Stateside - PinkPantheress",
-    tags: "majestic whimsical unique girly aesthetic",
-    url: "songs/stateside.mp3"
-  },
-  {
-    title: "Thunderstruck – AC/DC",
-    tags: "rock intense powerful angry high energy guitar",
-    url: "songs/thunderstruck.mp3"
-  }
+  { title: "Cece's Interlude - Drake", 
+    tags: "chill sad emotional soft piano mellow", 
+    url: "songs/cece.mp3" },
+
+  { title: "Guess - Charli XCX & Billie Eilish", 
+    tags: "energetic fun hype dance club fast", 
+    url: "songs/guess.mp3" },
+
+  { title: "Stateside - PinkPantheress", 
+    tags: "aesthetic cute whimsical girly soft", 
+    url: "songs/stateside.mp3" },
+
+  { title: "Just Wanna Rock - Lil Uzi Vert", 
+    tags: "intense hype mad dance angry energetic", 
+    url: "songs/justwannarock.mp3" },
+
+  { title: "No Hands - Waka Flocka Flame", 
+    tags: "dance club hype party", 
+    url: "songs/nohands.mp3" },
+
+  { title: "Fly Me to the Moon", 
+    tags: "jazz study calm smooth", 
+    url: "songs/flyme.mp3" },
+
+  { title: "Life Will Be - Cleo Sol", 
+    tags: "calm peaceful zen soft relaxing", 
+    url: "songs/lifewill.mp3" },
+
+  { title: "La Mentira", 
+    tags: "jazz global calm relaxing", 
+    url: "songs/lamentira.mp3" },
+
+  { title: "Numb - Men I Trust", 
+    tags: "sad depressed emotional crying soft", 
+    url: "songs/numb.mp3" },
+
+  { title: "Paint the Town Blue - Ashnikko", 
+    tags: "rock powerful villain guitar strong", 
+    url: "songs/paintthe.mp3" }
 ];
 
 
-function addMessage(text, sender) {
-  const chat = document.getElementById("chat");
-  const msg = document.createElement("div");
-  msg.className = sender;
-  msg.textContent = text;
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
+function extractTags(text) {
+  return text.toLowerCase().split(" ");
 }
 
-async function askGPT(prompt) {
-  const apiKey = "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"
-
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: "Extract music tags from user descriptions." },
-        { role: "user", content: prompt }
-      ]
-    })
-  });
-
-  const data = await response.json();
-  return data.choices[0].message.content.toLowerCase();
-}
 
 function pickSong(tags) {
   let best = null;
@@ -214,8 +197,8 @@ function pickSong(tags) {
   songs.forEach(song => {
     let score = 0;
 
-    tags.split(" ").forEach(tag => {
-      if (song.tags.includes(tag)) score += 1;
+    tags.forEach(tag => {
+      if (song.tags.includes(tag)) score++;
     });
 
     if (score > bestScore) {
@@ -224,34 +207,36 @@ function pickSong(tags) {
     }
   });
 
-  return best;
+  return best || songs[0];
 }
 
-async function sendMessage() {
-  const input = document.getElementById("input");
-  const prompt = input.value.trim();
-  if (!prompt) return;
+function addMessage(text, type) {
+  const chat = document.getElementById("chat");
+  const msg = document.createElement("div");
+  msg.className = type;
+  msg.textContent = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+}
 
-  addMessage("You: " + prompt, "user");
+function sendMessage() {
+  const input = document.getElementById("input");
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage("You: " + text, "user");
   input.value = "";
 
   addMessage("Thinking...", "bot");
 
-  const tags = await askGPT(prompt);
+  const tags = extractTags(text);
+
   const song = pickSong(tags);
 
-  // Update chat message
   document.querySelector(".bot:last-child").textContent =
     "AI: I recommend → " + song.title;
 
-  // --- Audio Playback ---
   const player = document.getElementById("player");
   player.src = song.url;
-
-  try {
-    await player.play(); // Works because sendMessage() happens from a user click
-    console.log("Playing:", song.title);
-  } catch (e) {
-    console.log("Autoplay blocked:", e);
-  }
-}
+  player.play();
+};
