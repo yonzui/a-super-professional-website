@@ -30,6 +30,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const genericRecs = [ { title: 'Discover Weekly', desc: 'A mix of fresh picks curated for you.' } ];
 
+const blobs = ['--x1','--y1','--x2','--y2','--x3','--y3','--x4','--y4'];
+const blobTargets = { '--x1':20, '--y1':30, '--x2':70, '--y2':25, '--x3':50, '--y3':75, '--x4':30, '--y4':70 };
+const blobVelocities = { '--x1':0, '--y1':0, '--x2':0, '--y2':0, '--x3':0, '--y3':0, '--x4':0, '--y4':0 };
+
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth) * 100;
+  const y = (e.clientY / window.innerHeight) * 100;
+
+  blobTargets['--x1'] = x + 10; blobTargets['--y1'] = y - 5;
+  blobTargets['--x2'] = x - 10; blobTargets['--y2'] = y + 5;
+  blobTargets['--x3'] = x + 5; blobTargets['--y3'] = y + 10;
+  blobTargets['--x4'] = x - 5; blobTargets['--y4'] = y - 10;
+});
+
+function animateBlobs() {
+  blobs.forEach(variable => {
+    const current = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(variable));
+    blobVelocities[variable] += (blobTargets[variable] - current) * 0.1; // easing factor
+    blobVelocities[variable] *= 0.8; // damping
+    const next = current + blobVelocities[variable];
+    document.documentElement.style.setProperty(variable, next + '%');
+  });
+  requestAnimationFrame(animateBlobs);
+}
+
+animateBlobs();
+
+
+
+// Start the animation loop
+animateBlobs();
+
+
+function updateBlob(variable, target) {
+    const current = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(variable));
+    const next = current + (target - current) * 0.12;
+    document.documentElement.style.setProperty(variable, next + "%");
+}
+
   buttons.forEach(btn => {
 
       btn.addEventListener('mouseenter', () => {
@@ -102,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
 function playSong() {
   const player = document.getElementById("player");
   player.play();
@@ -109,7 +149,7 @@ function playSong() {
 
 
 
-3
+
 // AI Song
 
 const songs = [
@@ -146,7 +186,7 @@ function addMessage(text, sender) {
 }
 
 async function askGPT(prompt) {
-  const apiKey = "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"; // <--- ENTER YOUR KEY
+  const apiKey = "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"
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -209,34 +249,9 @@ async function sendMessage() {
   player.src = song.url;
 
   try {
-    await player.play();
+    await player.play(); // Works because sendMessage() happens from a user click
     console.log("Playing:", song.title);
   } catch (e) {
     console.log("Autoplay blocked:", e);
   }
-
-  document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth) * 100;
-    const y = (e.clientY / window.innerHeight) * 100;
-
-    updateBlob("--x1", x + 10);
-    updateBlob("--y1", y - 5);
-
-    updateBlob("--x2", x - 10);
-    updateBlob("--y2", y + 5);
-
-    updateBlob("--x3", x + 5);
-    updateBlob("--y3", y + 10);
-
-    updateBlob("--x4", x - 5);
-    updateBlob("--y4", y - 10);
-});
-
-function updateBlob(variable, target) {
-    const current = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(variable));
-    const next = current + (target - current) * 0.05;
-    document.documentElement.style.setProperty(variable, next + "%");
 }
-
-}
-
