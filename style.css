@@ -1,6 +1,17 @@
+:root {
+    --x1: 20%; --y1: 30%;
+    --x2: 70%; --y2: 25%;
+    --x3: 50%; --y3: 75%;
+    --x4: 30%; --y4: 70%;
+}
+
+
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: white;    
+    background-color: white;  
+    margin: 0;
+    font-family: sans-serif;
+    overflow-x: hidden;  
 }
 
 button {
@@ -178,3 +189,43 @@ p {
 }
 
 .emotions button:focus { outline: 3px solid rgba(99, 102, 241, 0.12); }
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        radial-gradient(circle at 20% 30%, #ff6ec7 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, #6e9eff 0%, transparent 60%),
+        radial-gradient(circle at 50% 80%, #8affc1 0%, transparent 60%),
+        radial-gradient(circle at 30% 70%, #ffae6e 0%, transparent 60%);
+    
+    filter: blur(100px);
+    animation: floatBlobs 15s infinite alternate ease-in-out;
+}
+
+@keyframes floatBlobs {
+    0% {
+        --x1: 20%; --y1: 30%;
+        --x2: 70%; --y2: 25%;
+        --x3: 50%; --y3: 75%;
+        --x4: 30%; --y4: 70%;
+    }
+    50% {
+        --x1: 25%; --y1: 20%;
+        --x2: 65%; --y2: 35%;
+        --x3: 45%; --y3: 80%;
+        --x4: 35%; --y4: 60%;
+    }
+    100% {
+        --x1: 30%; --y1: 40%;
+        --x2: 75%; --y2: 30%;
+        --x3: 55%; --y3: 65%;
+        --x4: 40%; --y4: 80%;
+    }
+}
+
+audio {
+    display: none;
+}

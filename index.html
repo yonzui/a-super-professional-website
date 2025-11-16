@@ -9,9 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background"></div>
     <div class="container">
-
-
         <h1>Vibely</h1>
         <p><strong>Tired of listening to the same 4 songs?</strong>
         We got you.
@@ -31,9 +30,23 @@
                 <button data-emoji="🍔" class="emotion-btn">Hungry</button>
             </div>
             <div class="emoji-container"></div>
-    
+
+        <button onclick="playSong()">Play Song</button>
+        <h2>AI Music Reccomendation </h2>
+
+        <div id="chat"></div>
+
+        <input id="input" placeholder="What's your vibe?..." style="width:80%">
+        <button onclick="sendMessage()">Send</button>
+
     </div>
 
+
+    <audio id="player" controls></audio>
+
     <script src="script.js"></script>
+
+
+    
 </body>
 </html>
